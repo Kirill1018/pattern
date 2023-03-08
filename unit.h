@@ -1,0 +1,44 @@
+#pragma once
+#include <windows.h>
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <assert.h>
+using namespace std;
+enum ConsoleColor { Black, Blue, Green, Cyan, Red, Magenta, Brown, LightGray, DarkGray, LightBlue, LightGreen, LightCyan, LightRed, LightMagenta, Yellow, White };
+void SetColor(int text, int background)
+{
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hStdOut, (WORD)((background << 4) | text));
+}
+void GotoXY(int X, int Y)
+{
+	HANDLE hConsole;
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD coord = { X, Y };
+	SetConsoleCursorPosition(hStdOut, coord);
+}
+#include <stdio.h>
+/*0 Ч черный
+1 Ч синий
+2 Ч зеленый
+3 Ч голубой
+4 Ч красный
+5 Ч лиловый
+6 Ч желтый
+7 Ч белый
+8 Ч серый
+9 Ч свело - синий
+A Ч светло - зеленый
+B Ч светло - голубой
+— Ч светло - красный
+E Ч светло - желтый
+F Ч €рко - белый
+system("color F0");*/  // ”становка белого фона и черного текста
+class Unit
+{
+public:
+	virtual int getPrice() = 0;//цена
+	virtual void addUnit(Unit* unit) { assert(false); }
+	virtual ~Unit() {}
+};
